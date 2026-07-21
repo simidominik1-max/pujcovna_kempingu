@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rental Detail</title>
+</head>
+<body>
+
+<h1>Rental Detail</h1>
+
+Item: <span th:text="${rental.item != null ? rental.item.name : '-'}"></span><br>
+Borrower: <span th:text="${rental.user != null ? rental.user.name : '-'}"></span><br>
+From: <span th:text="${rental.dateFrom}"></span><br>
+To: <span th:text="${rental.dateTo}"></span><br>
+Status: <span th:text="${rental.status}"></span><br>
+Price per day: <span th:text="${rental.item != null ? rental.item.pricePerDay : '-'}"></span> Kc<br>
+
+<br>
+
+<a th:href="@{'/rentals/' + ${rental.id} + '/edit'}">Edit this Rental</a><br>
+<a th:href="@{'/rentals/' + ${rental.id} + '/delete'}">Delete this Rental</a><br>
+<br>
+<a th:href="@{/rentals/}">Back to List</a>
+
+</body>
+</html>

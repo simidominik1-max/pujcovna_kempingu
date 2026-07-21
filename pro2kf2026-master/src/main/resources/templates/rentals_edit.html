@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${rental.id != 0 ? 'Edit Rental' : 'New Rental'}"></title>
+</head>
+<body>
+
+<h1 th:text="${rental.id != 0 ? 'Edit Rental' : 'New Rental'}"></h1>
+
+<form th:action="@{/rentals/save}" method="post" th:object="${rental}">
+    <input type="hidden" th:field="*{id}">
+
+    Item: <select th:field="*{item}">
+    <option th:each="item : ${items}" th:value="${item.id}" th:text="${item.name}"></option>
+</select><br>
+
+    Borrower: <select th:field="*{user}">
+    <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"></option>
+</select><br>
+
+    From: <input type="date" th:field="*{dateFrom}"><br>
+    To: <input type="date" th:field="*{dateTo}"><br>
+
+    Status: <select th:field="*{status}">
+    <option value="POZADOVANO">Pozadovano</option>
+    <option value="SCHVALENO">Schvaleno</option>
+    <option value="VRACENO">Vraceno</option>
+</select><br>
+
+    <br>
+    <input type="submit" value="Save">
+</form>
+
+<br>
+<a th:href="@{/rentals/}">Back to List</a>
+
+</body>
+</html>

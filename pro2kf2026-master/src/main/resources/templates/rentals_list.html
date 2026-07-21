@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rental List</title>
+</head>
+<body>
+
+<h1>Rental List</h1>
+
+<a th:href="@{/rentals/create}">Create a New Rental</a>
+<br><br>
+
+<ul>
+    <li th:each="rental: ${rentals}">
+        <a th:href="@{'/rentals/' + ${rental.id}}"
+           th:text="${(rental.item != null ? rental.item.name : '?') + ' (' + rental.status + ')'}"></a>
+    </li>
+</ul>
+
+<br>
+<a th:href="@{/}">Back to Home</a>
+
+</body>
+</html>
