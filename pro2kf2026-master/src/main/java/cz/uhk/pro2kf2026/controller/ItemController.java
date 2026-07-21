@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import cz.uhk.pro2kf2026.service.CategoryService;
 
 @Controller
 @RequestMapping("/items")
@@ -14,11 +15,13 @@ public class ItemController {
 
     private final ItemService itemService;
     private final UserService userService;
+    private final CategoryService categoryService;
 
     @Autowired
-    public ItemController(ItemService itemService, UserService userService) {
+    public ItemController(ItemService itemService, UserService userService,  CategoryService categoryService) {
         this.itemService = itemService;
         this.userService = userService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/")
@@ -37,6 +40,7 @@ public class ItemController {
     public String create(Model model) {
         model.addAttribute("item", new Item());
         model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("categories", categoryService.getAllCategories());
         return "items_edit";
     }
 
@@ -44,6 +48,7 @@ public class ItemController {
     public String edit(@PathVariable("id") long id, Model model) {
         model.addAttribute("item", itemService.getItem(id));
         model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("categories", categoryService.getAllCategories());
         return "items_edit";
     }
 

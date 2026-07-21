@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${category.id != 0 ? 'Edit Category' : 'New Category'}"></title>
+</head>
+<body>
+
+<h1 th:text="${category.id != 0 ? 'Edit Category' : 'New Category'}"></h1>
+
+<form th:action="@{/categories/save}" method="post" th:object="${category}">
+    <input type="hidden" th:field="*{id}">
+    Name: <input type="text" th:field="*{name}"><br>
+    <br>
+    <input type="submit" value="Save">
+</form>
+
+<br>
+<a th:href="@{/categories/}">Back to List</a>
+
+</body>
+</html>

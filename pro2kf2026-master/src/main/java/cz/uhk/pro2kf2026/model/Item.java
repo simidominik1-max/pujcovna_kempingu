@@ -10,10 +10,14 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private int age;
+    private String description;
+    private double pricePerDay;
+
 
     @ManyToOne
     private User user;
+    @ManyToOne
+    private Category category;
 
     public User getUser() {
         return user;
@@ -25,9 +29,10 @@ public class Item {
 
     //Pomocí AltGr + Insert vygenerujte gettery, settery a konstruktor
 
-    public Item(String name, int age) {
+    public Item(String name, String description, double pricePerDay) {
         this.name = name;
-        this.age = age;
+        this.description = description;
+        this.pricePerDay = pricePerDay;
     }
 
     public Item() {}
@@ -49,11 +54,27 @@ public class Item {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setdescription(String description) {
+        this.description = description;
     }
+
+    public double getPricePerDay() {
+        return pricePerDay;
+    }
+
+    public void setPricePerDay(double pricePerDay) {
+        this.pricePerDay = pricePerDay;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
 }

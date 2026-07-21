@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Category List</title>
+</head>
+<body>
+
+<h1>Categor</h1>
+
+<a th:href="@{/categories/create}">Create a New Category</a>
+<br><br>
+
+<ul>
+    <li th:each="category: ${categories}">
+    <a th:href="@{'/categories/' + ${category.id}}" th:text="${category.name}"></a>
+
+
+    </li>
+
+</ul>
+
+<br>
+<a th:href="@{/}">Back to home</a>
+
+</body>
+</html>

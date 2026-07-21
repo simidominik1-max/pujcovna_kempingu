@@ -11,10 +11,15 @@
 <form th:action="@{/items/save}" method="post" th:object="${item}">
     <input type="hidden" th:field="*{id}">
     Name: <input type="text" th:field="*{name}"><br>
-    Age: <input type="number" th:field="*{age}"><br>
+    Description: <input type="text" th:field="*{description}"><br>
+    Price per day: <input type="number" step="0.01" th:field="*{pricePerDay}"><br>
     Owner: <select th:field="*{user}">
         <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"></option>
     </select>
+    <br>
+    Category: <select th:field="*{category}">
+    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+</select>
     <br>
     <input type="submit" value="Save">
 </form>

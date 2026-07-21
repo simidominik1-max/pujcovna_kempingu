@@ -9,8 +9,10 @@
 <h1>Item Detail</h1>
 
 Name: <span th:text="${item.name}"></span><br>
-Age: <span th:text="${item.age}"></span><br>
-Owner: <span th:text="${item.user.name}"></span><br>
+Description: <span th:text="${item.description}"></span><br>
+Price per day: <span th:text="${item.pricePerDay}"></span> Kc<br>
+Owner: <span th:text="${item.user != null ? item.user.name : '-'}"></span><br>
+Category: <span th:text="${item.category != null ? item.category.name : '-'}"></span><br>
 
 <br>
 

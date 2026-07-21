@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Category Detail</title>
+</head>
+<body>
+
+<h1>Category Detail</h1>
+
+Name:  <span th:text="${category.name}"></span><br>
+
+<a th:href="@{'/categories/' + ${category.id} + '/edit'}">Edit this Category</a><br>
+<a th:href="@{'/categories/' + ${category.id} + '/delete'}">Delete this Category</a><br>
+<br>
+<a th:href="@{/categories/}">Back to List</a>
+
+</body>
+</html>
