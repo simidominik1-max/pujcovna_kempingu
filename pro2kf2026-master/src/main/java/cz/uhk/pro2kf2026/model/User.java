@@ -16,14 +16,14 @@ public class User {
     private String role;
 
     @OneToMany(mappedBy = "user")
-    private List<Dog> dogs;
+    private List<Item> items;
 
-    public List<Dog> getDogs() {
-        return dogs;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public void setDogs(List<Dog> dogs) {
-        this.dogs = dogs;
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     public long getId() {

@@ -3,8 +3,8 @@ package cz.uhk.pro2kf2026.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "dogs")
-public class Dog {
+@Table(name = "items")
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,16 +25,13 @@ public class Dog {
 
     //Pomocí AltGr + Insert vygenerujte gettery, settery a konstruktor
 
-    public Dog(String name, int age) {
+    public Item(String name, int age) {
         this.name = name;
         this.age = age;
     }
 
-    public Dog() {}
+    public Item() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public long getId() {
         return id;

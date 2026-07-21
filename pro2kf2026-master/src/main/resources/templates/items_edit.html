@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${dog.id != 0 ? 'Edit Dog' : 'New Dog'}"></title>
+    <title th:text="${item.id != 0 ? 'Edit Item' : 'New Item'}"></title>
 </head>
 <body>
 
-<h1 th:text="${dog.id != 0 ? 'Edit Dog' : 'New Dog'}"></h1>
+<h1 th:text="${item.id != 0 ? 'Edit Item' : 'New Item'}"></h1>
 
-<form th:action="@{/dogs/save}" method="post" th:object="${dog}">
+<form th:action="@{/items/save}" method="post" th:object="${item}">
     <input type="hidden" th:field="*{id}">
     Name: <input type="text" th:field="*{name}"><br>
     Age: <input type="number" th:field="*{age}"><br>

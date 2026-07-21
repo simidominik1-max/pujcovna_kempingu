@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item List</title>
+</head>
+<body>
+
+<h1>Item Detail</h1>
+
+Name: <span th:text="${item.name}"></span><br>
+Age: <span th:text="${item.age}"></span><br>
+Owner: <span th:text="${item.user.name}"></span><br>
+
+<br>
+
+<a th:href="@{'/items/' + ${item.id} + '/edit'}">Edit this Item</a><br>
+<a th:href="@{'/items/' + ${item.id} + '/delete'}">Delete this Item</a>
+
+</body>
+</html>

@@ -1,9 +1,5 @@
 package cz.uhk.pro2kf2026;
 
-import cz.uhk.pro2kf2026.model.User;
-import cz.uhk.pro2kf2026.service.DogService;
-import cz.uhk.pro2kf2026.service.UserService;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
