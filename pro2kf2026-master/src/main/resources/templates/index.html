@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>My App</title>
+</head>
+<body>
+<h1>My App</h1>
+
+
+<span sec:authentication="name"></span>
+<br><br>
+
+<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/users/}">List of Users</a>
+<br>
+<a th:href="@{/dogs/}">List of Dogs</a>
+
+<br><br>
+
+<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">Administration</a>
+<br><br>
+
+<a th:href="@{/logout}">Logout</a>
+
+</body>
+</html>
