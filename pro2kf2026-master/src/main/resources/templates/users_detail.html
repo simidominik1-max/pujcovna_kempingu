@@ -17,5 +17,9 @@ Role: <span th:text="${user.role}"></span><br>
 <a th:href="@{'/users/' + ${user.id} + '/edit'}">Edit this User</a><br>
 <a th:href="@{'/users/' + ${user.id} + '/delete'}">Delete this User</a>
 
+<br>
+<br>
+<a th:href="@{/users/}">Back to List</a>
+
 </body>
 </html>
