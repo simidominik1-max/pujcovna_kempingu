@@ -1,5 +1,6 @@
 package cz.uhk.pro2kf2026.controller;
 
+import cz.uhk.pro2kf2026.model.Category;
 import cz.uhk.pro2kf2026.model.Item;
 import cz.uhk.pro2kf2026.service.ItemService;
 import cz.uhk.pro2kf2026.service.UserService;
@@ -25,8 +26,15 @@ public class ItemController {
     }
 
     @GetMapping("/")
-    public String all(Model model) {
-        model.addAttribute("items", itemService.getAllItems());
+    public String all(@RequestParam(name = "categoryId", required = false) Long categoryId, Model model) {
+        if (categoryId != null) {
+            Category category = categoryService.getCategory(categoryId);
+            model.addAttribute("items", itemService.getItemsByCategory(category));
+        } else {
+            model.addAttribute("items", itemService.getAllItems());
+        }
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("selectedCategoryId", categoryId);
         return "items_list";
     }
 

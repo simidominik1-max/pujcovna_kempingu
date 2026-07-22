@@ -12,9 +12,24 @@
 <a th:href="@{/items/create}">Create a New Item</a>
 <br><br>
 
+<form th:action="@{/items/}" method="get">
+    Category:
+    <select name="categoryId">
+        <option value="">-- all --</option>
+        <option th:each="category : ${categories}"
+                th:value="${category.id}"
+                th:text="${category.name}"
+                th:selected="${category.id == selectedCategoryId}"></option>
+    </select>
+    <input type="submit" value="Filter">
+</form>
+<br>
+
 <ul>
     <li th:each="item: ${items}">
         <a th:href="@{'/items/' + ${item.id}}" th:text="${item.name}"></a>
+        &ndash; <span th:text="${item.category != null ? item.category.name : '-'}"></span>,
+        <span th:text="${item.pricePerDay}"></span> Kc/den
     </li>
 </ul>
 

@@ -1,5 +1,6 @@
 package cz.uhk.pro2kf2026.service;
 
+import cz.uhk.pro2kf2026.model.Category;
 import cz.uhk.pro2kf2026.model.Item;
 import cz.uhk.pro2kf2026.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,10 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<Item> getAllItems() {
         return itemRepository.findAll();
+    }
+
+    @Override
+    public List<Item> getItemsByCategory(Category category) {
+        return itemRepository.findByCategory(category);
     }
 }
