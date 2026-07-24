@@ -1,9 +1,9 @@
 package cz.uhk.pro2kf2026;
 
+import cz.uhk.pro2kf2026.model.Category;
 import cz.uhk.pro2kf2026.model.Item;
 import cz.uhk.pro2kf2026.repository.ItemRepository;
 import cz.uhk.pro2kf2026.service.ItemServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,28 +26,60 @@ class ItemServiceImplTest {
     @InjectMocks
     private ItemServiceImpl itemService;
 
-    private Item testItem;
-
-    @BeforeEach
-    void setUp() {
-        // Příprava testovacího pejska před každým testem
-        testItem = new Item();
-        // Pokud máš v modelu setId(), můžeš odkomentovat:
-        // testItem.setId(1L);
-    }
-
     @Test
-    void getItem_ShouldReturnItemIfExists() {
-        when(itemRepository.findById(1L)).thenReturn(Optional.of(testItem));
+    void getItem_ShouldReturnItem_WhenExists() {
+        Item mockItem = mock(Item.class);
+        when(itemRepository.findById(1L)).thenReturn(Optional.of(mockItem));
 
         Item result = itemService.getItem(1L);
 
         assertNotNull(result);
-        assertEquals(testItem, result);
+        assertEquals(mockItem, result);
     }
 
     @Test
-    void getItem_ShouldReturnNullIfNotFound() {
+    void saveItem_ShouldCallRepositorySave() {
+        Item mockItem = mock(Item.class);
+
+        itemService.saveItem(mockItem);
+
+        verify(itemRepository).save(mockItem);
+    }
+
+    @Test
+    void deleteItem_ShouldCallDelete_WhenExists() {
+        Item mockItem = mock(Item.class);
+        when(itemRepository.findById(1L)).thenReturn(Optional.of(mockItem));
+
+        itemService.deleteItem(1L);
+
+        verify(itemRepository).deleteById(1L);
+    }
+
+    @Test
+    void getAllItems_ShouldReturnList() {
+        List<Item> mockList = Arrays.asList(mock(Item.class), mock(Item.class));
+        when(itemRepository.findAll()).thenReturn(mockList);
+
+        List<Item> result = itemService.getAllItems();
+
+        assertEquals(2, result.size());
+    }
+
+    @Test
+    void getItemsByCategory_ShouldReturnItems() {
+        Category mockCategory = mock(Category.class);
+        List<Item> mockList = Arrays.asList(mock(Item.class));
+        when(itemRepository.findByCategory(mockCategory)).thenReturn(mockList);
+
+        List<Item> result = itemService.getItemsByCategory(mockCategory);
+
+        assertEquals(1, result.size());
+        verify(itemRepository).findByCategory(mockCategory);
+    }
+
+    @Test
+    void getItem_ShouldReturnNull_WhenNotExists() {
         when(itemRepository.findById(99L)).thenReturn(Optional.empty());
 
         Item result = itemService.getItem(99L);
@@ -56,39 +88,11 @@ class ItemServiceImplTest {
     }
 
     @Test
-    void saveItem_ShouldCallRepositorySave() {
-        itemService.saveItem(testItem);
-
-        verify(itemRepository, times(1)).save(testItem);
-    }
-
-    @Test
-    void deleteItem_ShouldDeleteIfExists() {
-        when(itemRepository.findById(1L)).thenReturn(Optional.of(testItem));
-
-        itemService.deleteItem(1L);
-
-        verify(itemRepository, times(1)).deleteById(1L);
-    }
-
-    @Test
-    void deleteItem_ShouldNotDeleteIfNotExists() {
+    void deleteItem_ShouldNotCallDelete_WhenItemDoesNotExist() {
         when(itemRepository.findById(99L)).thenReturn(Optional.empty());
 
         itemService.deleteItem(99L);
 
-        // Ověříme, že se metoda deleteById nikdy nezavolala, protože pes neexistoval
         verify(itemRepository, never()).deleteById(anyLong());
-    }
-
-    @Test
-    void getAllItems_ShouldReturnListOfItems() {
-        List<Item> items = Arrays.asList(new Item(), new Item());
-        when(itemRepository.findAll()).thenReturn(items);
-
-        List<Item> result = itemService.getAllItems();
-
-        assertEquals(2, result.size());
-        verify(itemRepository, times(1)).findAll();
     }
 }
