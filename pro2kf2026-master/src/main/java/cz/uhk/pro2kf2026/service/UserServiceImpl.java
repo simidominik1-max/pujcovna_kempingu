@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    @Override
+    @Override // hashovani hesla
     public void saveUser(User user) {
         if(user.getPassword().isBlank()){
             userRepository.findById(user.getId()).ifPresent(original -> user.setPassword(original.getPassword()));
